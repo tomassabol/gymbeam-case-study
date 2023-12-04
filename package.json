@@ -1,0 +1,26 @@
+{
+  "name": "gymbeam---case-study",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc src/index.ts --outDir ./dist",
+    "dev": "bun dev --watch",
+    "lint": "eslint src/**/*.ts",
+    "start": "bun dist/index.js"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.44.8",
+    "@types/node": "^20.10.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "bun-types": "latest",
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.7.1",
+    "zod": "^3.22.4"
+  }
+}
