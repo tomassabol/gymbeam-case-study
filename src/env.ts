@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+// This is the schema for the environment variables
+// It will throw a runtime error if the schema is not satisfied
 export const env = createEnv({
   server: {
     NODE_ENV: z
@@ -46,5 +48,5 @@ export const env = createEnv({
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
    */
-  skipValidation: false,
+  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });
