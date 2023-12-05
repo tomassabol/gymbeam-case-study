@@ -7,16 +7,18 @@ export default {
    * Returns the shortest path to pick up all products.
    */
   async getShortestPath({ input }: { input: Input }): Promise<Output> {
+    // filters duplicit values - product IDs in input
+    const filteredProducts = [...new Set(input.products)];
     // retrieve positions for each product id from the external API
     const getProductPositions = await Promise.all(
-      input.products.map(
+      filteredProducts.map(
         async (productId) => await getPositions({ id: productId }),
       ),
     );
     // flatten the array into a single array
     const productPositions = getProductPositions.flat();
     // sort the array by the shortest distance from the starting position
-    let sortedProductPositions = productPositions.toSorted(
+    const sortedProductPositions = productPositions.sort(
       (a, b) =>
         calculateDistance({ pointA: input.startingPosition, pointB: a }) -
         calculateDistance({ pointA: input.startingPosition, pointB: b }),
@@ -73,8 +75,9 @@ export default {
 
 /**
  * Retrieve positions for a given product ID from the external API
+ * export for testing purposes
  */
-async function getPositions({
+export async function getPositions({
   id,
 }: {
   id: string;
@@ -91,8 +94,9 @@ async function getPositions({
 
 /**
  * Calculate the distance between two points
+ * export for testing purposes
  */
-function calculateDistance({
+export function calculateDistance({
   pointA,
   pointB,
 }: {
