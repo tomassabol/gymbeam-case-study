@@ -5,26 +5,24 @@ export const ProductIDSchema = z
   .min(1)
   .refine((str) => str.includes("product-"), "Invalid product ID");
 
-export const ProductPositionSchema = z.object({
-  positionId: z.string().min(1),
+export const PositionSchema = z.object({
   x: z.number(),
   y: z.number(),
   z: z.number(),
+});
+export type Position = z.infer<typeof PositionSchema>;
+
+export const ProductPositionSchema = z.object({
+  positionId: z.string().min(1),
   productId: ProductIDSchema,
   quantity: z.number(),
+  ...PositionSchema.shape,
 });
 export type ProductPosition = z.infer<typeof ProductPositionSchema>;
 
-export const StartingPositionSchema = z.object({
-  x: z.number(),
-  y: z.number(),
-  z: z.number(),
-});
-export type StartingPosition = z.infer<typeof StartingPositionSchema>;
-
 export const InputSchema = z.object({
   products: z.array(ProductIDSchema),
-  startingPosition: StartingPositionSchema,
+  startingPosition: PositionSchema,
 });
 export type Input = z.infer<typeof InputSchema>;
 
